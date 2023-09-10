@@ -23,7 +23,9 @@ const uri = process.env.MONGO_URI;
 app.set("view engine", "pug");
 
 // Security Middlewares
-app.use(cors());
+app.use(cors(/*{
+  credentials: true
+}*/));
 app.use(helmet());
 app.use(rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes window

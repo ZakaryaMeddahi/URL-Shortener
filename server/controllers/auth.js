@@ -1,6 +1,7 @@
 const { BadRequestError, UnauthorizedError } = require("../errors");
 const User = require("../models/User");
 
+const clientUrl = process.env.CLIENT_DOMAIN;
 
 const register = async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ const register = async (req, res, next) => {
       maxAge: 1000 * 60 * 60 * 24 * 7
     });
     res.status(201)
-    .json({ success: true, user: { id: user._id, username: user.username } });
+    .json({ success: true, user: { id: user._id, username: user.username }, token });
   } catch (err) {
     console.error(err);
     next(err);
@@ -27,7 +28,8 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    if(email || password < 6) {
+    console.log(email, password);
+    if(!email || password.length < 6) {
       const err = new BadRequestError('Please provide valide email and password!');
       return next(err);
     }
@@ -44,10 +46,13 @@ const login = async (req, res, next) => {
     const token = user.createJWT();
     res.cookie('token', token, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      // sameSite: 'lax',
+      // secure: true
     });
+    // res.header('Access-Control-Allow-Origin', 'true');
     res.status(200)
-    .json({ success: true, user: { id: user._id, username: user.username } });
+    .json({ success: true, user: { id: user._id, username: user.username }, token });
   } catch (err) {
     console.error(err);
     next(err);
@@ -56,7 +61,7 @@ const login = async (req, res, next) => {
 
 const logout = (req, res) => {
   res.cookie('token', '', { maxAge: 1 });
-  res.redirect('/login');
+  res.redirect(`${clientUrl}login.html`);
 }
 
 module.exports = {

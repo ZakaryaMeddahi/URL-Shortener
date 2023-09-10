@@ -11,6 +11,7 @@ const getShortcuts = async (req, res) => {
       const err = new NotFoundError('Error when trying to get shortcuts!');
       return next(err);
     }
+    // res.header('Access-Control-Allow-Origin', '*');
     res.status(200).json({ success: true, shortcuts });
   } catch (err) {
     console.error(err);
@@ -82,6 +83,7 @@ const deleteShortcut = async (req, res, next) => {
       return next(err);
     }
     await shortcut.deleteOne();
+    // res.header('Access-Control-Allow-Origin', '*');
     res.status(200).json({ 
       success: true, 
       message: `Shortcut with ID ${shortcutId} has been deleted successfully` 
