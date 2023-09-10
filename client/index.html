@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/60047068a8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style/dashboard.css">
+  <title>URL Shortener | Home</title>
+</head>
+<body>
+  <a class="logout" href="http://localhost:3000/api/v1/auth/logout">logout</a>
+  <p>create your free and custom shortcuts!</p>
+  <main>
+    <section>
+      <h2>Shortcuts</h2>
+      <div class="error">error</div>
+      <form class="card">
+        <input type="text" id="url" placeholder="Url"><br>
+        <div>
+          <span class="domain">http://localhost:3000</span>
+          <span class="slash">/</span>
+          <input type="text" id="pathname" placeholder="Pathname">
+        </div>
+        <button type="submit" id="submit">submit</button>
+      </form>
+    </section>
+    <div class="shortcuts-container">
+      
+    </div>
+  </main>
+  <script src="js/getShortcuts.js" type="module"></script>
+  <script src="js/createShortcut.js" type="module"></script>
+  <script src="js/deleteShortcut.js" type="module"></script>
+  <script src="js/updateShortcut.js" type="module"></script>
+  <script src="js/copyShortcut.js" type="module"></script>
+  <script src="js/logout.js"></script>
+</body>
+</html>

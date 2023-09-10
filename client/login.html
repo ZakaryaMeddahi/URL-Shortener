@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/60047068a8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style/auth.css">
+  <title>URL Shortener | Login</title>
+</head>
+<body>
+  <h1>login</h1>
+  <p>please enter your credentials</p>
+  <form>
+    <label for="email">
+      <i class="fa-regular fa-envelope"></i>
+      <input type="email" id="email" placeholder="Email">
+    </label>
+    <label for="password" class="password">
+      <i class="fa-solid fa-key"></i>
+      <input type="password" id="password" placeholder="Password">
+    </label>
+    <a class="forget-password" href="#">forget password?</a>
+    <div class="error">error</div>
+    <button type="submit" id="login">login</button>
+    <p>not a member yet? <a href="/client/register.html">register!</a></p>
+  </form>
+  <script src="js/login.js" type="module"></script>
+</body>
+</html>
