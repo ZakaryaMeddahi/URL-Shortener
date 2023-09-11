@@ -6,7 +6,8 @@ const generatePathname = require("../services/generatePathname");
 
 const getShortcuts = async (req, res) => {
   try {
-    const shortcuts = await Shortcut.find();
+    const { id: userId } = req.user;
+    const shortcuts = await Shortcut.find({ createdBy: userId });
     if(!shortcuts) {
       const err = new NotFoundError('Error when trying to get shortcuts!');
       return next(err);
