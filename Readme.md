@@ -11,9 +11,13 @@ Install node dependencies:
 ```bash
 npm install
 ```
-Create .env file and add your mongoDB URI in it, here is an example:
+Create .env file and add your Atlas mongoDB URI in it, here is an example:
 ```bash
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.<EMAIL>.net/<dbname>?retryWrites=true&w=maj
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.<EMAIL>.net/<dbname>?retryWrites=true&w=maj
+```
+Then add client side url in .env as well:
+```bash
+CLIENT_DOMAIN=http://localhost:5500/client/
 ```
 Start the application with this command line:
 ```bash
