@@ -26,7 +26,6 @@ const deleteShortcut = (trash) => {
     })
     .then(data => {
       card.remove();
-      console.log(data);
     })
     .catch(err => console.error(err));
   }

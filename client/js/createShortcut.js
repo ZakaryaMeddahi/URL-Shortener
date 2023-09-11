@@ -7,7 +7,6 @@ const submit = document.getElementById('submit');
 
 const shortcutCard = ({ _id: id, url, pathname }) => {
   const card = document.createElement('div');
-  console.log(pathname);
   card.classList.add("shortcut");
   card.id = id;
   card.dataset.url = url;
@@ -56,7 +55,6 @@ submit.onclick = (e) => {
     shortcutsContainer.prepend(shortcutCard(data.shortcut));
     pathname = '';
     url = '';
-    console.log(data);
   })
   .catch(err => console.error(err));
 }

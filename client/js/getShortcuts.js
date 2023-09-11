@@ -7,7 +7,6 @@ const token = localStorage.getItem('token');
 
 const shortcutCard = ({ _id: id, url, pathname }) => {
   const card = document.createElement('div');
-  console.log(pathname);
   card.classList.add("shortcut");
   card.id = id;
   card.dataset.url = url;
@@ -47,7 +46,6 @@ fetch(`${urlEndpoint}api/v1/urls`, {
   return response.json();
 })
 .then(data => {
-  console.log(data);
   const shortcutsContainer = document.querySelector('.shortcuts-container');
   data.shortcuts.forEach(shortcut => {
     shortcutsContainer.prepend(shortcutCard(shortcut));
