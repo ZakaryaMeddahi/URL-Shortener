@@ -54,6 +54,8 @@ submit.onclick = (e) => {
   .then(data => {
     const shortcutsContainer = document.querySelector('.shortcuts-container');
     shortcutsContainer.prepend(shortcutCard(data.shortcut));
+    pathname = '';
+    url = '';
     console.log(data);
   })
   .catch(err => console.error(err));
