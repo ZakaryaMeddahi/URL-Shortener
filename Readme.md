@@ -1,3 +1,6 @@
+### Live
+https://url-shortener-tau-sooty.vercel.app/
+
 ## Instalation
 Clone repository (local branch):
 ```bash
