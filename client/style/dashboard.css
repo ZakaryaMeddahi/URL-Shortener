@@ -100,7 +100,7 @@ input:focus {
 }
 
 .shortcuts-container {
-  height: 40vh;
+  height: 38vh;
   overflow-y: scroll;
 }
 
