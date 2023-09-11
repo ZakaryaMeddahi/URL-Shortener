@@ -128,7 +128,7 @@ i {
   margin-left: auto;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 740px) {
   body > a {
     right: 50px;
   }
