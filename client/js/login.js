@@ -26,7 +26,7 @@ login.onclick = (e) => {
     return response.json();
   })
   .then(data => {
-    location.href = clientUrl;
+    // location.href = clientUrl;
     localStorage.setItem('token', data.token);
     console.log(data);
   })
