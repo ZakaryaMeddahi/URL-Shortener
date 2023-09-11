@@ -2,7 +2,7 @@ import { urlEndpoint, clientUrl } from "../config.js";
 
 const login = document.getElementById('login');
 
-login.onclick = (e) => {
+login.addEventListener('click', e => {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -21,14 +21,13 @@ login.onclick = (e) => {
       const errorCard = document.querySelector('.error');
       errorCard.textContent = err.message;
       errorCard.style.visibility = 'visible';
-      return;
+      throw Error(err.message);
     }
     return response.json();
   })
   .then(data => {
-    // location.href = clientUrl;
+    location.href = clientUrl;
     localStorage.setItem('token', data.token);
-    console.log(data);
   })
   .catch(err => console.error(err));
-}
+});
