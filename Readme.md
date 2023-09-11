@@ -15,9 +15,11 @@ Create .env file and add your Atlas mongoDB URI in it, here is an example:
 ```bash
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.<EMAIL>.net/<dbname>?retryWrites=true&w=maj
 ```
-Then add client side url in .env as well:
+Then add port, client side url and API endpoint in .env as well:
 ```bash
+PORT=3000
 CLIENT_DOMAIN=http://localhost:5500/client/
+SERVER_DOMAIN=http://localhost:3000/
 ```
 Start the application with this command line:
 ```bash
