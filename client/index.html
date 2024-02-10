@@ -5,12 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/60047068a8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style/dashboard.css">
+  <style>
+    body {
+      display: none;
+    }
+  </style>
   <title>URL Shortener | Home</title>
   <script>
-    const token = localStorage.getItem('token');
-    if(!token) {
-      window.location.href='./login.html';
+    // Check if the user has a valid JWT token
+    function checkJWT() {
+        const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+
+        if (!token) {
+          window.location.href = './login.html'; // Redirect to login page if token is missing
+          return;
+        }
+
+        // Send a request to the server to validate the token
+        fetch('https://url-shortener-y7no.onrender.com/api/v1/auth/validateToken', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token // Send the token in the 'Authorization' header with the value 'Bearer <token>'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Invalid token');
+          }
+          // Token is valid
+          document.body.style.display = 'flex'; // Show the page
+        })
+        .catch(error => {
+          console.error(error);
+          window.location.href = './login.html'; // Redirect to login page if token is invalid
+        });
     }
+
+    // Call the function to check the JWT token when the page loads
+    window.onload = checkJWT;
+
   </script>
 </head>
 <body>

@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const { BadRequestError, UnauthorizedError } = require("../errors");
 const User = require("../models/User");
 
@@ -7,7 +8,7 @@ const register = async (req, res, next) => {
   try {
     const { password } = req.body;
     if(password < 6) {
-      const err = new BadRequestError('Please provide valide password!');
+      const err = new BadRequestError('Please provide valid password!');
       return next(err);
     }
     const user = User({ ...req.body });
@@ -30,7 +31,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     console.log(email, password);
     if(!email || password.length < 6) {
-      const err = new BadRequestError('Please provide valide email and password!');
+      const err = new BadRequestError('Please provide valid email and password!');
       return next(err);
     }
     const user = await User.findOne({ email });
@@ -40,7 +41,7 @@ const login = async (req, res, next) => {
     }
     const isMatch = await user.matchPassword(password);
     if(!isMatch) {
-      const err = new UnauthorizedError('Incorrect Passeword!');
+      const err = new UnauthorizedError('Incorrect Password!');
       return next(err);
     }
     const token = user.createJWT();
@@ -59,13 +60,32 @@ const login = async (req, res, next) => {
   }
 }
 
+const validateToken = (req, res) => {
+  try {
+    console.log('validateToken');
+    const authHeader = req.headers.authorization;
+    if(!authHeader || !authHeader.startsWith('Bearer ')) {
+      const err = new UnauthorizedError('Invalid token');
+      return next(err);
+    }
+    token = authHeader.split(' ')[1];
+    console.log('validate token', token);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ success: true, user: payload });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+}
+
 const logout = (req, res) => {
-  res.cookie('token', '', { maxAge: 1 });
+  // res.cookie('token', '', { maxAge: 1 });
   res.redirect(`${clientUrl}login.html`);
 }
 
 module.exports = {
   register,
   login,
+  validateToken,
   logout
 }

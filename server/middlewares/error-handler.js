@@ -2,12 +2,12 @@
 const errorHandler = (err, req, res, next) => {
   let customError = {
     statusCode: err.statusCode || 500,
-    message: err.message || "Somthing went wrong in the server!",
+    message: err.message || "Something went wrong in the server!",
   }
 
   if(err.name === 'ValidationError') {
     customError.statusCode = 400;
-    customError.message = `Please provide valide ${Object.keys(err.errors)
+    customError.message = `Please provide valid ${Object.keys(err.errors)
       .map(field => field).join(', ')}!`;
   }
 
@@ -18,7 +18,7 @@ const errorHandler = (err, req, res, next) => {
 
   if(err.name === 'CastError') {
     customError.statusCode = 400;
-    customError.message = 'ID syntax is not correct: Provide a valide ID please!';
+    customError.message = 'ID syntax is not correct: Provide a valid ID please!';
   }
 
   // res.status(customError.statusCode)

@@ -3,6 +3,7 @@ const { UnauthorizedError } = require('../errors');
 
 const authMiddleware = (req, res, next) => {
   try {
+    console.log('authMiddleware');
     const authHeader = req.headers.authorization;
     if(!authHeader || !authHeader.startsWith('Bearer ')) {
       const err = new UnauthorizedError('Invalid token');
@@ -14,6 +15,7 @@ const authMiddleware = (req, res, next) => {
     // if (!token){
     //   console.log('no cookie');
     // }
+    console.log('validate token', token);
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const { id, username } = payload;
     req.user = { id, username };

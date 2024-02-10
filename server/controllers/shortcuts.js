@@ -16,6 +16,7 @@ const getShortcuts = async (req, res) => {
     res.status(200).json({ success: true, shortcuts });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 }
 
@@ -47,6 +48,7 @@ const getShortcut = async (req, res) => {
     res.status(200).json({ success: true, shortcut });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 }
 
@@ -69,6 +71,7 @@ const updateShortcut = async (req, res, next) => {
     res.status(200).json({ success: true, updatedShortcut });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 }
 
