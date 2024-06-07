@@ -16,7 +16,7 @@ npm install
 ```
 Create .env file and add your Atlas mongoDB URI in it, here is an example:
 ```bash
-MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.<EMAIL>.net/<dbname>?retryWrites=true&w=maj
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mfmabgc.mongodb.net/<dbname>?retryWrites=true&w=maj
 ```
 Then add port, client side url and API endpoint in .env as well:
 ```bash
