@@ -26,35 +26,43 @@ const shortcutCard = ({ _id: id, url, pathname }) => {
   return card;
 };
 
-submit.onclick = (e) => {
-  e.preventDefault();
-  const url = document.getElementById('url');
-  const pathname = document.getElementById('pathname');
-  const token = localStorage.getItem('token');
+const createShortcut = () => {
+  submit.onclick = (e) => {
+    e.preventDefault();
+    const url = document.getElementById('url');
+    const pathname = document.getElementById('pathname');
+    const token = localStorage.getItem('token');
 
-  fetch(`${urlEndpoint}api/v1/urls`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ url: url.value, pathname: pathname.value }),
-  })
-    .then(async (response) => {
-      if (!response.ok) {
-        const err = await response.json();
-        const errorCard = document.querySelector('.error');
-        errorCard.textContent = err.message;
-        errorCard.style.visibility = 'visible';
-        return;
-      }
-      return response.json();
+    fetch(`${urlEndpoint}api/v1/urls`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ url: url.value, pathname: pathname.value }),
     })
-    .then((data) => {
-      const shortcutsContainer = document.querySelector('.shortcuts-container');
-      shortcutsContainer.prepend(shortcutCard(data.shortcut));
-      pathname.value = '';
-      url.value = '';
-    })
-    .catch((err) => console.error(err));
+      .then(async (response) => {
+        if (!response.ok) {
+          const err = await response.json();
+          const errorCard = document.querySelector('.error');
+          errorCard.textContent = err.message;
+          errorCard.style.visibility = 'visible';
+          return;
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const shortcutsContainer = document.querySelector(
+          '.shortcuts-container'
+        );
+        shortcutsContainer.prepend(shortcutCard(data.shortcut));
+        pathname.value = '';
+        url.value = '';
+      })
+      .catch((err) => console.error(err));
+  };
 };
+
+createShortcut();
+
+export default createShortcut;
