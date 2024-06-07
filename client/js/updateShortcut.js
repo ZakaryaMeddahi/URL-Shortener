@@ -1,3 +1,4 @@
+import createShortcut from './createShortcut.js';
 import { urlEndpoint } from '../config.js';
 
 const updates = document.querySelectorAll('.fa-pen-to-square');
@@ -41,6 +42,7 @@ const updateShortcut = (update) => {
         const newShortcut = card.querySelector('p');
         newShortcut.textContent = `${urlEndpoint}${data.updatedShortcut.pathname}`;
         submit.id = 'submit';
+        createShortcut() // reset click event listener
         urlInput.value = '';
         pathnameInput.value = '';
         console.log(data);
