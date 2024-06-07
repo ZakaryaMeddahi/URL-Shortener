@@ -35,6 +35,21 @@ body > p {
   color: #F5F3F490;
 }
 
+.logout {
+  font-size: 15px;
+  color: #F5F3F490;
+  padding: 7px;
+  border: 1.5px solid #F5F3F490;
+  border-radius: 4px;
+  transition: .5s;
+}
+
+.logout:hover {
+  background-color: #F5F3F490;
+  color: var(--secondaryColor);
+  border-color: transparent;
+}
+
 section {
   background-color: #F5F3F440;
   padding: 20px;
