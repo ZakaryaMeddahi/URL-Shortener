@@ -8,7 +8,7 @@
     "start": "node app",
     "devStart": "nodemon app"
   },
-  "author": "",
+  "author": "Zakarya Meddahi",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
