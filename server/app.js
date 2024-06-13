@@ -39,6 +39,13 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/health',(req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'URL SHORTENER API IS HEALTHY'
+  })
+})
+
 // Routes
 app.use('/', redirectRouter);
 app.use('/api/v1/auth', authRouter);
